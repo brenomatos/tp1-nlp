@@ -9,7 +9,7 @@ from nltk.tokenize import word_tokenize
 
 
 corpus = gensim.models.word2vec.Text8Corpus('text8', max_sentence_length=10000)
-model = gensim.models.Word2Vec(corpus,size=300, window=5, min_count=1, workers=5)
+model = gensim.models.Word2Vec(corpus,size=200, window=5, min_count=1, workers=5, iter=5,sg=0)
 
 model.save("bin")
 context_words_list = ["mexico", "mexican","macedonia"]
