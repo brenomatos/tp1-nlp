@@ -19,4 +19,5 @@ print(model.predict_output_word(context_words_list, topn=20))
 
 
 #most_similar_to_given(entity1, entities_list)¶
-
+#model.accuracy('/tmp/questions-words.txt') esse aqui usa o mesmo questions-words que vem no codigo da google
+https://rare-technologies.com/word2vec-tutorial/
