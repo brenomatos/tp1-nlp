@@ -9,11 +9,13 @@ model.save("bin")
 context_words_list = ["mexico", "mexican","macedonia"]
 print(model.predict_output_word(context_words_list, topn=20))
 
-model = gensim.models.Word2Vec.load('bin')
-print(model.wv.accuracy('questions-words_lower.txt'))
-similarities = model.wv.most_similar(positive=['mexico', 'mexican', "macedonia"], topn=20)
+# model = gensim.models.Word2Vec.load('bin')
+
+#palavra1 palavra2 palavra3 palavra4 eh o modelo que tem no questions-words
+#Palavra2 e palavra3 são as positivas. Palavra1 negativa.
+similarities = model.wv.most_similar(positive=['mexican', "macedonia"],negative=['mexico'], topn=20)
 print(similarities)
 
+
+#model.wv.accuracy('questions-words_lower.txt')
 # esse aqui usa o mesmo questions-words que vem no codigo da google
-# https://rare-technologies.com/word2vec-tutorial/
-# pip install "h5py==2.8.0rc1"
