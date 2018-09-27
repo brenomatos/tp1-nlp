@@ -1,8 +1,8 @@
 from itertools import chain
 from glob import glob
 
-file = open('questions-words.txt', 'r')
-
-lines = [line.lower() for line in file]
-with open('questions-words_lower.txt', 'w') as out:
-     out.writelines((lines))
+def to_lower(input_file,output_file):
+    file = open(input_file, 'r')
+    lines = [line.lower() for line in file]
+    with open(output_file, 'w') as out:
+         out.writelines((lines))
