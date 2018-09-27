@@ -6,8 +6,6 @@ from glob import glob
 from nltk.tokenize import word_tokenize
 import os,logging
 
-#tng_size = 200 -> misses 374
-#tng_size = 300 -> misses 374
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 tng_size = 200
@@ -49,10 +47,7 @@ output_path = "w2v-"+str(tng_size)+"-"+str(tng_window)+"-"+str(tng_min_count)+"-
 # model = gensim.models.Word2Vec.load('w2v-200-5-1-5-5-0')
 model = treino_word2vec(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg,output_path)
 similaridade("questions-words.txt", model, output_path)
-#deletando arquivos desnecessarios
-model.wv.accuracy('questions-words.txt')#resulta em estatisticas no log criado
-os.remove(output_path+".trainables.syn1neg.npy")
-os.remove(output_path+".wv.vectors.npy")
 
-# esse aqui usa o mesmo questions-words que vem no codigo da google
-# model = gensim.models.Word2Vec.load('w2v-200-5-1-5-5-0') carregar modelo ja pronto
+model.wv.accuracy('questions-words.txt')#resulta em estatisticas no log criado
+os.remove(output_path+".trainables.syn1neg.npy")#deletando arquivos desnecessarios
+os.remove(output_path+".wv.vectors.npy")
