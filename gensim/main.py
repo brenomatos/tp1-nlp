@@ -6,7 +6,7 @@ from glob import glob
 from nltk.tokenize import word_tokenize
 import os,logging
 
-logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+logging.basicConfig(filename="log",format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 tng_size = 200
 tng_window = 5
