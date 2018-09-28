@@ -15,6 +15,7 @@ def plot(file_path):
     plt.title("Boxplot "+file_path[:-4])
     boxplot.savefig(str(file_path[:-4])+'-results'+"/"+file_path[:-4]+".jpg")
 
+    print(df.head())
     df.describe().to_csv(str(file_path[:-4])+'-results'+"/"+"boxplot-"+file_path[:-4]+"-"+"results.csv")
 
     scatter = plt.figure()
@@ -24,6 +25,12 @@ def plot(file_path):
     plt.ylabel("Erro - Similaridade")
     scatter.savefig(str(file_path[:-4])+'-results'+"/scatter-"+file_path[:-4]+".jpg")
     # plt.show()
+
+    try:#mover todos os arquivos de um treino para a mesma pasta
+        os.rename(current_directory+"/"+file_path[:-4]+".log",final_directory+'/'+file_path[:-4]+".log" )
+        os.rename(current_directory+"/"+file_path,final_directory+'/'+file_path)
+    except Exception as e:
+        pass
 
 
 

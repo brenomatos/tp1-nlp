@@ -31,7 +31,7 @@ def similaridade(input_file, model, output_file, csv_output):
     #palavra0 palavra1 palavra2 palavra3 eh o modelo que tem no questions-words
     #Palavra1 e palavra2 são as positivas. Palavra0 negativa.
     csv = open(csv_output, "w")
-    csv.write("correct_word,correct_word_similarity,top_minus_correct_similarity\n")
+    csv.write("correct_word,correct_word_similarity,top_minus_correct_similarity,similarity_index\n")
     file = open(input_file, 'r')
     lines = [line.lower() for line in file]
     for i in lines:
