@@ -52,7 +52,7 @@ def similaridade(input_file, model, output_file, csv_output):
     csv.close()
     file.close()
 
-
+to_lower("questions-words.txt","questions-words.txt")#alterando arquivo para minusculo por garantia
 output_path = "w2v-"+str(tng_size)+"-"+str(tng_window)+"-"+str(tng_min_count)+"-"+str(tng_workers)+"-"+str(tng_iter)+"-"+str(tng_sg)
 logging.basicConfig(filename=output_path+".log",format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
@@ -61,6 +61,6 @@ model = treino_word2vec(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,t
 similaridade("questions-words.txt", model, output_path, output_path+".csv")
 
 model.wv.accuracy('questions-words.txt')#resulta em estatisticas no log criado
-plot(output_path+".csv")
 os.remove(output_path+".trainables.syn1neg.npy")#deletando arquivos desnecessarios
 os.remove(output_path+".wv.vectors.npy")
+plot(output_path+".csv")
