@@ -5,6 +5,7 @@ from itertools import chain
 from glob import glob
 from nltk.tokenize import word_tokenize
 import os,logging
+from plot import plot
 
 
 tng_size = 200
@@ -53,7 +54,7 @@ def similaridade(input_file, model, output_file, csv_output):
 
 
 output_path = "w2v-"+str(tng_size)+"-"+str(tng_window)+"-"+str(tng_min_count)+"-"+str(tng_workers)+"-"+str(tng_iter)+"-"+str(tng_sg)
-logging.basicConfig(filename=output_path+"log",format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+logging.basicConfig(filename=output_path+".log",format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 # model = gensim.models.Word2Vec.load('w2v-200-5-1-5-5-0')
 model = treino_word2vec(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg,output_path)
@@ -62,3 +63,4 @@ similaridade("questions-words.txt", model, output_path, output_path+".csv")
 model.wv.accuracy('questions-words.txt')#resulta em estatisticas no log criado
 os.remove(output_path+".trainables.syn1neg.npy")#deletando arquivos desnecessarios
 os.remove(output_path+".wv.vectors.npy")
+plot(output_path+".csv")
