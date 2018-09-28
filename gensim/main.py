@@ -61,6 +61,6 @@ model = treino_word2vec(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,t
 similaridade("questions-words.txt", model, output_path, output_path+".csv")
 
 model.wv.accuracy('questions-words.txt')#resulta em estatisticas no log criado
+plot(output_path+".csv")
 os.remove(output_path+".trainables.syn1neg.npy")#deletando arquivos desnecessarios
 os.remove(output_path+".wv.vectors.npy")
-plot(output_path+".csv")

@@ -6,3 +6,6 @@ def to_lower(input_file,output_file):
     lines = [line.lower() for line in file]
     with open(output_file, 'w') as out:
          out.writelines((lines))
+
+
+to_lower("questions-words.txt","questions-words.txt")
