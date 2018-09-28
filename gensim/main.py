@@ -11,7 +11,7 @@ from plot import plot
 tng_size = 200
 tng_window = 5
 tng_min_count = 1
-tng_workers = 5
+tng_workers = 12
 tng_iter = 5
 tng_sg = 0
 

@@ -15,8 +15,7 @@ def plot(file_path):
     plt.title("Boxplot "+file_path[:-4])
     boxplot.savefig(str(file_path[:-4])+'-results'+"/"+file_path[:-4]+".jpg")
 
-    print(df.head())
-    df.describe().to_csv(str(file_path[:-4])+'-results'+"/"+"boxplot-"+file_path[:-4]+"-"+"results.csv")
+    df.describe().to_csv(str(file_path[:-4])+'-results'+"/"+file_path[:-4]+"-"+"results.csv")
 
     scatter = plt.figure()
     plt.scatter(df["correct_word_similarity"], df["top_minus_correct_similarity"])
@@ -27,8 +26,9 @@ def plot(file_path):
     # plt.show()
 
     try:#mover todos os arquivos de um treino para a mesma pasta
-        os.rename(current_directory+"/"+file_path[:-4]+".log",final_directory+'/'+file_path[:-4]+".log" )
-        os.rename(current_directory+"/"+file_path,final_directory+'/'+file_path)
+        os.rename(current_directory+"/"+file_path[:-4]+".log",final_directory+'/'+file_path[:-4]+".log" )#log de execucao
+        os.rename(current_directory+"/"+file_path,final_directory+'/'+file_path)#csv gerado em main.py
+        os.rename(current_directory+"/"+file_path[:-4],final_directory+'/'+file_path[:-4])#arquivo binario
     except Exception as e:
         pass
 
