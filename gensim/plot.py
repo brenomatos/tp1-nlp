@@ -35,4 +35,4 @@ def plot(file_path):
 
 
 
-plot("w2v-200-5-1-12-5-0.csv")
+# plot("w2v-200-5-1-12-5-0.csv")
