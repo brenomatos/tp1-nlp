@@ -10,11 +10,20 @@ def plot(file_path):
         os.makedirs(final_directory)
 
     df = pd.read_csv(file_path, index_col=False,  escapechar='|', sep=',')
-    boxplot = plt.figure()
+    # boxplot da distribuicao do erro da similaridade
+    boxplot1 = plt.figure()
     plt.boxplot(df["top_minus_correct_similarity"])
-    plt.title("Boxplot "+file_path[:-4]+": Distribuição do Erro da Similaridade")
+    plt.title("Boxplot "+file_path[:-4]+": Erro da Similaridade")
     plt.ylabel("Erro Similaridade")
-    boxplot.savefig(str(file_path[:-4])+'-results'+"/"+"boxplot-"+file_path[:-4]+".jpg")
+    boxplot1.savefig(str(file_path[:-4])+'-results'+"/"+"boxplot-erro-"+file_path[:-4]+".jpg")
+
+    # boxplot da distribuicao da similaridade da palavra correta
+    boxplot2 = plt.figure()
+    plt.boxplot(df["correct_word_similarity"])
+    plt.title("Boxplot "+file_path[:-4]+": Similaridade da Palavra Correta")
+    plt.ylabel("Similaridade da Palavra Correta")
+    boxplot2.savefig(str(file_path[:-4])+'-results'+"/"+"boxplot-"+file_path[:-4]+".jpg")
+
 
     df.describe().to_csv(str(file_path[:-4])+'-results'+"/"+file_path[:-4]+"-"+"results.csv")
 

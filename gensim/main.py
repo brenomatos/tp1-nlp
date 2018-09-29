@@ -68,6 +68,8 @@ tng_workers = 5
 tng_iter = 5
 # tng_sg = 0
 
-for tng_window in range(1, 20, 5):
-    for sg in range(0,2):
-        main(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg):
+main(200,5,1,5,1,0)
+#
+# for tng_window in range(1, 20, 5):
+#     for sg in range(0,2):
+#         main(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg)
