@@ -20,9 +20,9 @@ def plot(file_path):
 
     scatter = plt.figure()
     plt.scatter(df["correct_word_similarity"], df["top_minus_correct_similarity"])
-    plt.title("scatterplot "+file_path[:-4])
-    plt.xlabel("Similaridade - Palavra Correta")
-    plt.ylabel("Erro - Similaridade")
+    plt.title("Scatterplot "+file_path[:-4])
+    plt.xlabel("Similaridade: Palavra Correta")
+    plt.ylabel("Erro: Similaridade")
     scatter.savefig(str(file_path[:-4])+'-results'+"/scatter-"+file_path[:-4]+".jpg")
     # plt.show()
 
