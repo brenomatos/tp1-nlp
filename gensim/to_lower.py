@@ -8,4 +8,14 @@ def to_lower(input_file,output_file):
          out.writelines((lines))
 
 
-to_lower("questions-words.txt","questions-words.txt")
+# to_lower("questions-words.txt","questions-words.txt")
+
+def resize_corpus(input_file, output_file, percentage):
+    with open(input_file, "r") as input:
+        lines = input.read().splitlines()
+        # lines = [for line in file]
+        print(len(lines))
+        # for line in lines:
+            # print(line+"\n\n\n")
+
+resize_corpus("text8","lixo",50)

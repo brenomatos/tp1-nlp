@@ -34,13 +34,14 @@ def plot(file_path):
     plt.ylabel("Erro: Similaridade")
     scatter.savefig(str(file_path[:-4])+'-results'+"/scatter-"+file_path[:-4]+".jpg")
     # plt.show()
+    plt.close("all")
 
     try:#mover todos os arquivos de um treino para a mesma pasta
-        os.rename(current_directory+"/"+file_path[:-4]+".log",final_directory+'/'+file_path[:-4]+".log" )#log de execucao
         os.rename(current_directory+"/"+file_path,final_directory+'/'+file_path)#csv gerado em main.py
         os.rename(current_directory+"/"+file_path[:-4],final_directory+'/'+file_path[:-4])#arquivo binario
+        # os.rename(current_directory+"/"+file_path[:-4]+".log",final_directory+'/'+file_path[:-4]+".log" )#log de execucao
     except Exception as e:
-        pass
+        print(e)
 
 
 

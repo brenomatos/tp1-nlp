@@ -49,7 +49,7 @@ def similaridade(input_file, model, output_file, csv_output):
 def main(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg):
     to_lower("questions-words.txt","questions-words.txt")#alterando arquivo para minusculo por garantia
     output_path = "w2v-"+str(tng_size)+"-"+str(tng_window)+"-"+str(tng_min_count)+"-"+str(tng_workers)+"-"+str(tng_iter)+"-"+str(tng_sg)
-    logging.basicConfig(filename=output_path+".log",format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+    logging.basicConfig(filename="logTotal.log",format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO, filemode="w")
 
     # model = gensim.models.Word2Vec.load('w2v-200-5-1-5-5-0')
     model = treino_word2vec(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg,output_path)
@@ -59,17 +59,17 @@ def main(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg):
     os.remove(output_path+".trainables.syn1neg.npy")#deletando arquivos desnecessarios
     os.remove(output_path+".wv.vectors.npy")
     plot(output_path+".csv")
-
+    # logging.disable(level=1)
 
 tng_size = 200
 # tng_window = 5
 tng_min_count = 1
 tng_workers = 5
-tng_iter = 5
+tng_iter = 1
 # tng_sg = 0
 
-main(200,5,1,5,1,0)
+# main(200,5,1,5,1,0)
 #
-# for tng_window in range(1, 20, 5):
-#     for sg in range(0,2):
-#         main(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg)
+for tng_window in range(2, 6, 2):
+    for tng_sg in range(0,2):
+        main(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg)
