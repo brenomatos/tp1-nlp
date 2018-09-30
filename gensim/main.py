@@ -6,7 +6,28 @@ from glob import glob
 from nltk.tokenize import word_tokenize
 import os,logging
 from plot import plot
+from shutil import copyfile
 
+def resize_corpus(input_file, output_file, percentage):
+    with open(input_file, "r") as input:
+        count = 0
+        str_aux=""
+        list_final = []
+        for line in input:
+            for word in line.split():
+                str_aux = str_aux+word+" "
+                count = count+1
+                if(count==10):
+                    list_final.append(str_aux)
+                    count = 0
+                    str_aux=""
+    with open(output_file, "w") as output:
+        limit = len(list_final)/100*percentage
+        count = 0
+        for line in range(len(list_final)+1):
+            if (count<=limit):
+                output.write(list_final[line])
+                count = count + 1
 
 def to_lower(input_file,output_file):#formatando o arquivo de validacao para minusculo
     file = open(input_file, 'r')
@@ -14,8 +35,8 @@ def to_lower(input_file,output_file):#formatando o arquivo de validacao para min
     with open(output_file, 'w') as out:
          out.writelines((lines))
 
-def treino_word2vec(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg,output_path):
-    corpus = gensim.models.word2vec.Text8Corpus('text8', max_sentence_length=10000)
+def treino_word2vec(corpus_file,tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg,output_path):
+    corpus = gensim.models.word2vec.Text8Corpus(corpus_file, max_sentence_length=10000)
     model = gensim.models.Word2Vec(corpus,size=tng_size, window=tng_window, min_count=tng_min_count, workers=tng_workers, iter=tng_iter,sg=tng_sg)
     model.save(output_path)
     return model
@@ -46,13 +67,13 @@ def similaridade(input_file, model, output_file, csv_output):
     file.close()
 
 # A main trata o arquivo questions-words, treina o modelo, testa acuracia e gera graficos
-def main(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg):
+def main(corpus_file,tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg):
     to_lower("questions-words.txt","questions-words.txt")#alterando arquivo para minusculo por garantia
-    output_path = "w2v-"+str(tng_size)+"-"+str(tng_window)+"-"+str(tng_min_count)+"-"+str(tng_workers)+"-"+str(tng_iter)+"-"+str(tng_sg)
+    output_path = corpus_file +"-w2v-"+str(tng_size)+"-"+str(tng_window)+"-"+str(tng_min_count)+"-"+str(tng_workers)+"-"+str(tng_iter)+"-"+str(tng_sg)
     logging.basicConfig(filename="logTotal.log",format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO, filemode="w")
 
     # model = gensim.models.Word2Vec.load('w2v-200-5-1-5-5-0')
-    model = treino_word2vec(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg,output_path)
+    model = treino_word2vec(corpus_file,tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg,output_path)
     similaridade("questions-words.txt", model, output_path, output_path+".csv")
 
     model.wv.accuracy('questions-words.txt')#resulta em estatisticas no log criado
@@ -65,11 +86,18 @@ tng_size = 200
 # tng_window = 5
 tng_min_count = 1
 tng_workers = 5
+TROCAR TNG_ITER PARA 10
+TROCAR TNG_ITER PARA 10
+TROCAR TNG_ITER PARA 10
 tng_iter = 1
 # tng_sg = 0
 
-# main(200,5,1,5,1,0)
-#
-for tng_window in range(2, 6, 2):
-    for tng_sg in range(0,2):
-        main(tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg)
+current_directory = os.getcwd()
+copyfile(current_directory+"/text8", current_directory+"/corpus100")# apenas por padronizacao
+resize_corpus("text8","corpus75",75)
+resize_corpus("text8","corpus50",50)
+
+for corpus_file in range(50,125,25):
+    for tng_window in range(2, 12, 2):
+        for tng_sg in range(0,2):
+            main("corpus"+str(corpus_file),tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg)

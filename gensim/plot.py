@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
+from shutil import copyfile
 
 def plot(file_path):
     current_directory = os.getcwd()
