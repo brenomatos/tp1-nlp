@@ -89,7 +89,7 @@ tng_workers = 5
 # TROCAR TNG_ITER PARA 10
 # TROCAR TNG_ITER PARA 10
 # TROCAR TNG_ITER PARA 10
-tng_iter = 10
+tng_iter = 5
 # tng_sg = 0
 
 current_directory = os.getcwd()
