@@ -31,4 +31,4 @@ def resize_corpus(input_file, output_file, percentage):
                 output.write(list_final[line])
                 count = count + 1
 
-# resize_corpus("text8","lixo",75)
+# resize_corpus("text8","lixo",50)
