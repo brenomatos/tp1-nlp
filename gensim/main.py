@@ -86,10 +86,10 @@ tng_size = 200
 # tng_window = 5
 tng_min_count = 1
 tng_workers = 5
-TROCAR TNG_ITER PARA 10
-TROCAR TNG_ITER PARA 10
-TROCAR TNG_ITER PARA 10
-tng_iter = 1
+# TROCAR TNG_ITER PARA 10
+# TROCAR TNG_ITER PARA 10
+# TROCAR TNG_ITER PARA 10
+tng_iter = 10
 # tng_sg = 0
 
 current_directory = os.getcwd()
