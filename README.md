@@ -29,12 +29,15 @@ python3 main.py
 For every result, we generate 3 graphs, like the examples below:
 
 Similarity Boxplot:
+
 ![Example Graph: Similarity Boxplot](/results/corpus75-w2v-200-8-1-5-5-1-results/boxplot-corpus75-w2v-200-8-1-5-5-1.jpg "Similarity Boxplot")
 
 Similarity Error Boxplot:
+
 ![Example Graph: Error Boxplot](/results/corpus75-w2v-200-8-1-5-5-1-results/boxplot-erro-corpus75-w2v-200-8-1-5-5-1.jpg "Error Boxplot")
 
 Similarity Scatterplot:
+
 ![Example Graph: Similarity Scatterplot](/results/corpus75-w2v-200-8-1-5-5-1-results/scatter-corpus75-w2v-200-8-1-5-5-1.jpg "Similarity Scatterplot")
 
 Also, one log file that keeps statistics of hits/misses. Unfortunately, I have not come up with a parsing solution to process this data, but it's not hard to do it by hand.
