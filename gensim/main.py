@@ -95,6 +95,7 @@ training_iter = 5
 
 current_directory = os.getcwd()
 copyfile(current_directory+"/text8", current_directory+"/corpus100")# keeps the same pattern
+print("Started Resizing")
 resize_corpus("text8","corpus75",75)
 resize_corpus("text8","corpus50",50)
 print("Resizing Done!")
