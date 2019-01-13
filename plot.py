@@ -14,15 +14,15 @@ def plot(file_path):
     # boxplot: similarity error distribution
     boxplot1 = plt.figure()
     plt.boxplot(df["top_minus_correct_similarity"])
-    plt.title("Boxplot "+file_path[:-4]+": Erro da Similaridade")
-    plt.ylabel("Erro Similaridade")
-    boxplot1.savefig(str(file_path[:-4])+'-results'+"/"+"boxplot-erro-"+file_path[:-4]+".jpg")
+    plt.title("Boxplot "+file_path[:-4]+": Similarity Error Distribution")
+    plt.ylabel("Similarity Error")
+    boxplot1.savefig(str(file_path[:-4])+'-results'+"/"+"boxplot-error-"+file_path[:-4]+".jpg")
 
     # boxplot: correct word's similarity distribution
     boxplot2 = plt.figure()
     plt.boxplot(df["correct_word_similarity"])
-    plt.title("Boxplot "+file_path[:-4]+": Similaridade da Palavra Correta")
-    plt.ylabel("Similaridade da Palavra Correta")
+    plt.title("Boxplot "+file_path[:-4]+": Correct Word's Similarity Distribution")
+    plt.ylabel("Correct Word's Similarity")
     boxplot2.savefig(str(file_path[:-4])+'-results'+"/"+"boxplot-"+file_path[:-4]+".jpg")
 
 
@@ -31,8 +31,8 @@ def plot(file_path):
     scatter = plt.figure()
     plt.scatter(df["correct_word_similarity"], df["top_minus_correct_similarity"])
     plt.title("Scatterplot "+file_path[:-4])
-    plt.xlabel("Similaridade: Palavra Correta")
-    plt.ylabel("Erro: Similaridade")
+    plt.xlabel("Correct Word's Similarity Distribution")
+    plt.ylabel("Error: Similarity")
     scatter.savefig(str(file_path[:-4])+'-results'+"/scatter-"+file_path[:-4]+".jpg")
     # plt.show()
     plt.close("all")
