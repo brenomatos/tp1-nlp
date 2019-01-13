@@ -38,9 +38,12 @@ def to_lower(input_file,output_file):# Formatting the "questions-words.txt" to l
     with open(output_file, 'w') as out:
          out.writelines((lines))
 
-def return_word2vec_model(corpus_file,tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg,output_path):
+def return_word2vec_model(corpus_file,training_size,training_window,training_min_count,training_workers,training_iter,training_sg,output_path):
+    # training_sg = skipgram, 0 for CBOW and 1 for skipgram
+    # Most parameters for this method are explained in the gensim documentation
+    # Just search for the "gensim.models.Word2Vec" method doc.
     corpus = gensim.models.word2vec.Text8Corpus(corpus_file, max_sentence_length=10000)
-    model = gensim.models.Word2Vec(corpus,size=tng_size, window=tng_window, min_count=tng_min_count, workers=tng_workers, iter=tng_iter,sg=tng_sg)
+    model = gensim.models.Word2Vec(corpus,size=training_size, window=training_window, min_count=training_min_count, workers=training_workers, iter=training_iter,sg=training_sg)
     model.save(output_path)
     return model
 
@@ -59,7 +62,7 @@ def similarity(input_file, model, output_file, csv_output):
                 for i in range(0, len(similarities)):
                     if (similarities[i][0] == word_tokens[3]):
                         break
-                # The line below prints, in this order: the correct word, it's similarity given the other 3 words,
+                # The line below prints to a csv file, in this order: the correct word, it's similarity given the other 3 words,
                 # the diference between the top ranking word's similarity and the similarity of the correct word,
                 # followed by the index of the correct word in the top 50 suggested words
                 csv.write(word_tokens[3]+","+str(similarities[i][1])+","+str(similarities[0][1]-similarities[i][1])+","+str(i)+"\n")
@@ -70,33 +73,34 @@ def similarity(input_file, model, output_file, csv_output):
     file.close()
 
 # the main method preprocesses the questions-words file, trains the model, tests it's accuracy e generates graphs
-def main(corpus_file,tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg):
+def main(corpus_file,training_size,training_window,training_min_count,training_workers,training_iter,training_sg):
     to_lower("questions-words.txt","questions-words.txt")# altering the file to lowercase, just to be sure
-    output_path = corpus_file +"-w2v-"+str(tng_size)+"-"+str(tng_window)+"-"+str(tng_min_count)+"-"+str(tng_workers)+"-"+str(tng_iter)+"-"+str(tng_sg)
+    output_path = corpus_file +"-w2v-"+str(training_size)+"-"+str(training_window)+"-"+str(training_min_count)+"-"+str(training_workers)+"-"+str(training_iter)+"-"+str(training_sg)
     logging.basicConfig(filename="logTotal.log",format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO, filemode="w")
 
-    model = return_word2vec_model(corpus_file,tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg,output_path)
+    model = return_word2vec_model(corpus_file,training_size,training_window,training_min_count,training_workers,training_iter,training_sg,output_path)
     similarity("questions-words.txt", model, output_path, output_path+".csv")
 
-    model.wv.accuracy('questions-words.txt')# creates statistics in the log file
+    model.wv.accuracy('questions-words.txt')# creates hit/miss statistics in the log file
     os.remove(output_path+".trainables.syn1neg.npy")# deletes unnecessary files
     os.remove(output_path+".wv.vectors.npy")
     plot(output_path+".csv")
 
-tng_size = 200
-# tng_window = 5
-tng_min_count = 1
-tng_workers = 5
-tng_iter = 5
-# tng_sg = 0
+training_size = 200
+# training_window = 5
+training_min_count = 1
+training_workers = 5
+training_iter = 5
+# training_sg = 0
 
 current_directory = os.getcwd()
 copyfile(current_directory+"/text8", current_directory+"/corpus100")# keeps the same pattern
 resize_corpus("text8","corpus75",75)
 resize_corpus("text8","corpus50",50)
+print("Resizing Done!")
 
 for corpus_file in range(50,125,25):
-    for tng_window in range(2, 12, 2):
-        for tng_sg in range(0,2):
-            print(str(corpus_file)+"-"+str(tng_window)+"-"+str(tng_sg))
-            main("corpus"+str(corpus_file),tng_size,tng_window,tng_min_count,tng_workers,tng_iter,tng_sg)
+    for training_window in range(2, 12, 2):
+        for training_sg in range(0,2):
+            print(str(corpus_file)+"-"+str(training_window)+"-"+str(training_sg))
+            main("corpus"+str(corpus_file),training_size,training_window,training_min_count,training_workers,training_iter,training_sg)
