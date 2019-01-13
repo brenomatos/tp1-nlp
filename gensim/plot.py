@@ -11,14 +11,14 @@ def plot(file_path):
         os.makedirs(final_directory)
 
     df = pd.read_csv(file_path, index_col=False,  escapechar='|', sep=',')
-    # boxplot da distribuicao do erro da similaridade
+    # boxplot: similarity error distribution
     boxplot1 = plt.figure()
     plt.boxplot(df["top_minus_correct_similarity"])
     plt.title("Boxplot "+file_path[:-4]+": Erro da Similaridade")
     plt.ylabel("Erro Similaridade")
     boxplot1.savefig(str(file_path[:-4])+'-results'+"/"+"boxplot-erro-"+file_path[:-4]+".jpg")
 
-    # boxplot da distribuicao da similaridade da palavra correta
+    # boxplot: correct word's similarity distribution
     boxplot2 = plt.figure()
     plt.boxplot(df["correct_word_similarity"])
     plt.title("Boxplot "+file_path[:-4]+": Similaridade da Palavra Correta")
@@ -37,10 +37,10 @@ def plot(file_path):
     # plt.show()
     plt.close("all")
 
-    try:#mover todos os arquivos de um treino para a mesma pasta
-        os.rename(current_directory+"/"+file_path,final_directory+'/'+file_path)#csv gerado em main.py
-        os.rename(current_directory+"/"+file_path[:-4],final_directory+'/'+file_path[:-4])#arquivo binario
-        # os.rename(current_directory+"/"+file_path[:-4]+".log",final_directory+'/'+file_path[:-4]+".log" )#log de execucao
+    try:# move all training files to the same folder
+        os.rename(current_directory+"/"+file_path,final_directory+'/'+file_path)# csv created in main.py
+        os.rename(current_directory+"/"+file_path[:-4],final_directory+'/'+file_path[:-4])# binary file
+        # os.rename(current_directory+"/"+file_path[:-4]+".log",final_directory+'/'+file_path[:-4]+".log" )# execution log
     except Exception as e:
         print(e)
 
