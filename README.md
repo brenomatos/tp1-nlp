@@ -17,8 +17,8 @@ Then, clone this repository.
 
 
 ## Built With
-[Gensim](https://radimrehurek.com/gensim/)
+- [Gensim](https://radimrehurek.com/gensim/)
 
-[NLTK](https://www.nltk.org/)
+- [NLTK](https://www.nltk.org/)
 
-[Matplotlib](https://matplotlib.org/)
+- [Matplotlib](https://matplotlib.org/)
