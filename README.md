@@ -40,6 +40,11 @@ Similarity Scatterplot:
 
 ![Example Graph: Similarity Scatterplot](/results/corpus75-w2v-200-8-1-5-5-1-results/scatter-corpus75-w2v-200-8-1-5-5-1.jpg "Similarity Scatterplot")
 
+Note that every graph's name is structured like:
+```bash
+Corpus file+"-w2v-"+ size(Dimensionality of the word vectors)+"-"+window (Maximum distance between the current and predicted word within a sentence)+"-"+min_count(Ignores all words with total frequency lower than this)+workers(number of threads)+iter(number of epochs)+sg(1 for skip-gram; 0 for CBOW)
+```
+
 Also, one log file that keeps statistics of hits/misses. Unfortunately, I have not come up with a parsing solution to process this data, but it's not hard to do it by hand.
 
 
